@@ -20,3 +20,34 @@ body {
 main {
   padding: 32px;
 }
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  background: #1f1f1f;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+  display: block;
+}
+
+.movie-info {
+  padding: 10px;
+}
+
+.movie-info h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.movie-info p {
+  margin: 0;
+  color: #b3b3b3;
+  font-size: 13px;
+}
