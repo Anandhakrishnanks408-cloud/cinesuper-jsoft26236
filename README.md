@@ -1,4 +1,4 @@
-CineSuper
+# CineSuper
 
 A mini OTT movie database. Browse movies, search by title, filter by language, open a movie's details and leave a rating and review. The data lives in a Supabase (PostgreSQL) database and the front end is plain HTML, CSS and JavaScript.
 
