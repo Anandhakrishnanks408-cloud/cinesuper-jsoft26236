@@ -83,3 +83,49 @@ main {
   border-color: #e50914;
   color: #fff;
 }
+.detail {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.detail.hidden {
+  display: none;
+}
+
+.detail-box {
+  position: relative;
+  background: #1f1f1f;
+  border-radius: 8px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.detail-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.detail-box h2 {
+  margin: 0 0 12px;
+}
+
+.detail-box p {
+  margin: 6px 0;
+  color: #b3b3b3;
+}
+
+.movie-card {
+  cursor: pointer;
+}

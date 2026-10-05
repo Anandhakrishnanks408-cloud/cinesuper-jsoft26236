@@ -14,7 +14,7 @@ function renderMovies(movies) {
   }
 
   grid.innerHTML = movies.map(movie => `
-    <div class="movie-card">
+    <div class="movie-card" data-id="${movie.id}">
       <img src="${movie.poster_url}" alt="${movie.title}">
       <div class="movie-info">
         <h3>${movie.title}</h3>
@@ -68,5 +68,49 @@ document.getElementById("filters").addEventListener("click", (e) => {
 
   applyFilters();
 });
+async function showDetail(id) {
+  const { data: movie, error } = await db
+    .from("movies")
+    .select("*, genres(name)")
+    .eq("id", id)
+    .single();
 
+  const { data: rating, error: ratingError } = await db
+    .from("movie_ratings")
+    .select("avg_rating, review_count")
+    .eq("id", id)
+    .single();
+if (ratingError) console.error(ratingError);
+
+  const content = document.getElementById("detail-content");
+
+  if (error) {
+    content.textContent = "Could not load details.";
+    console.error(error);
+  } else {
+    const avg = rating && rating.avg_rating !== null ? rating.avg_rating : "No ratings yet";
+    const count = rating ? rating.review_count : 0;
+
+    content.innerHTML = `
+      <h2>${movie.title}</h2>
+      <p>${movie.release_year} · ${movie.language}</p>
+      <p>Genre: ${movie.genres.name}</p>
+      <p>Duration: ${movie.duration_min} min</p>
+      <p>Average rating: ${avg}</p>
+      <p>Reviews: ${count}</p>
+    `;
+  }
+
+  document.getElementById("detail").classList.remove("hidden");
+}
+
+document.getElementById("movie-grid").addEventListener("click", (e) => {
+  const card = e.target.closest(".movie-card");
+  if (!card) return;
+  showDetail(card.dataset.id);
+});
+
+document.getElementById("detail-close").addEventListener("click", () => {
+  document.getElementById("detail").classList.add("hidden");
+});
 loadMovies();
