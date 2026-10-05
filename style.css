@@ -51,3 +51,14 @@ main {
   color: #b3b3b3;
   font-size: 13px;
 }
+.search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1f1f1f;
+  color: #fff;
+  font-size: 16px;
+}
