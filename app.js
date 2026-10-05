@@ -98,6 +98,22 @@ if (ratingError) console.error(ratingError);
       <p>Duration: ${movie.duration_min} min</p>
       <p>Average rating: ${avg}</p>
       <p>Reviews: ${count}</p>
+
+      <form class="review-form" data-movie-id="${movie.id}">
+        <h3>Add your review</h3>
+        <input name="reviewer_name" type="text" placeholder="Your name" required>
+        <select name="rating" required>
+          <option value="">Rating</option>
+          <option value="5">5 - Excellent</option>
+          <option value="4">4 - Good</option>
+          <option value="3">3 - Okay</option>
+          <option value="2">2 - Poor</option>
+          <option value="1">1 - Bad</option>
+        </select>
+        <textarea name="comment" rows="2" placeholder="Comment (optional)"></textarea>
+        <button type="submit">Submit review</button>
+        <p class="review-msg" id="review-msg"></p>
+      </form>
     `;
   }
 
@@ -112,5 +128,26 @@ document.getElementById("movie-grid").addEventListener("click", (e) => {
 
 document.getElementById("detail-close").addEventListener("click", () => {
   document.getElementById("detail").classList.add("hidden");
+});
+document.getElementById("detail-content").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const movieId = Number(form.dataset.movieId);
+  const msg = document.getElementById("review-msg");
+
+  const { error } = await db.from("reviews").insert({
+    movie_id: movieId,
+    reviewer_name: form.reviewer_name.value.trim(),
+    rating: Number(form.rating.value),
+    comment: form.comment.value.trim() || null
+  });
+
+  if (error) {
+    msg.textContent = "Could not save review.";
+    console.error(error);
+    return;
+  }
+
+  showDetail(movieId);
 });
 loadMovies();

@@ -129,3 +129,43 @@ main {
 .movie-card {
   cursor: pointer;
 }
+.review-form {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+}
+
+.review-form h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #141414;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.review-form button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #e50914;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.review-msg {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
