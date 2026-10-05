@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  background: #141414;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  padding: 16px 32px;
+  background: #000000;
+}
+
+.logo {
+  margin: 0;
+  color: #e50914;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+main {
+  padding: 32px;
+}
