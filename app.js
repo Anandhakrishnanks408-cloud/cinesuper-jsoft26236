@@ -24,6 +24,21 @@ function renderMovies(movies) {
   `).join("");
 }
 
+let currentLanguage = "All";
+
+function applyFilters() {
+  const text = document.getElementById("search").value.toLowerCase();
+
+  const filtered = allMovies.filter(movie => {
+    const matchesTitle = movie.title.toLowerCase().includes(text);
+    const matchesLanguage =
+      currentLanguage === "All" || movie.language === currentLanguage;
+    return matchesTitle && matchesLanguage;
+  });
+
+  renderMovies(filtered);
+}
+
 async function loadMovies() {
   const { data, error } = await db
     .from("movies")
@@ -37,15 +52,21 @@ async function loadMovies() {
   }
 
   allMovies = data;
-  renderMovies(allMovies);
+  applyFilters();
 }
 
-document.getElementById("search").addEventListener("input", (e) => {
-  const text = e.target.value.toLowerCase();
-  const filtered = allMovies.filter(movie =>
-    movie.title.toLowerCase().includes(text)
-  );
-  renderMovies(filtered);
+document.getElementById("search").addEventListener("input", applyFilters);
+
+document.getElementById("filters").addEventListener("click", (e) => {
+  const btn = e.target.closest(".filter-btn");
+  if (!btn) return;
+
+  currentLanguage = btn.dataset.lang;
+
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  applyFilters();
 });
 
 loadMovies();
